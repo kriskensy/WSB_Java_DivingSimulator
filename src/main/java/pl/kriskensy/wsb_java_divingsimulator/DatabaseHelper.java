@@ -4,7 +4,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class provides helper methods to interact with the database.
+ */
+
 public class DatabaseHelper {
+
+    /**
+     * Retrieves a list of students from the database.
+     */
 
     public static List<Student> getStudents() {
         List<Student> students = new ArrayList<>();

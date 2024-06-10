@@ -4,10 +4,18 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
+/**
+ * This class represents the server for the diving simulator.
+ */
+
 public class DiveServer {
     private static final int PORT = 12345;
     private static Map<Integer, Double> tankLevels = new HashMap<>();
     private static Map<Integer, Double> depths = new HashMap<>();
+
+    /**
+     * Main method to start the dive server.
+     */
 
     public static void main(String[] args) {
 
@@ -27,12 +35,20 @@ public class DiveServer {
         }
     }
 
+    /**
+     * This class handles client connections.
+     */
+
     private static class ClientHandler extends Thread {
         private Socket clientSocket;
 
         public ClientHandler(Socket socket) {
             this.clientSocket = socket;
         }
+
+        /**
+         * Method that runs the client handler thread.
+         */
 
         public void run() {
 

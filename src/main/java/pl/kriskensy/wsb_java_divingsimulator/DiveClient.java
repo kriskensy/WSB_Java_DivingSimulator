@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+/**
+ * This class represents a client for the diving simulator.
+ */
+
 public class DiveClient {
     private Socket socket;
     private PrintWriter output;
@@ -20,6 +24,10 @@ public class DiveClient {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Sends a request to update the depth of a student.
+     */
 
     public void updateDepth(int studentId, double newDepth) {
         output.println("UPDATE_DEPTH," + studentId + "," + newDepth);

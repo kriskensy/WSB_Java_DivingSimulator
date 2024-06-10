@@ -25,6 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * This class represents the diving simulator application.
+ */
+
 public class DiveSimulator extends Application {
 
     //todo ograniczyc glebokosc poruszania sie od 100 (powierzchnia) bo mi wyskakuja nad wode :D
@@ -43,6 +47,10 @@ public class DiveSimulator extends Application {
     private int countdown = 60;
     private List<Point2D> instructorPath = new ArrayList<>();
     private Random random = new Random();
+
+    /**
+     * Starts the application by setting up the primary stage.
+     */
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -195,6 +203,10 @@ public class DiveSimulator extends Application {
 
     private boolean movementStopped = false;
 
+    /**
+     * Selects random students from a list and adds them to the simulation.
+     */
+
     private void selectRandomStudents(ListView<Student> studentListView) {
         List<Student> allStudents = DatabaseHelper.getStudents();
         List<Integer> selectedIndexes = new ArrayList<>();
@@ -213,6 +225,10 @@ public class DiveSimulator extends Application {
         }
     }
 
+    /**
+     * Starts the countdown to the end of the simulation.
+     */
+
     private void startCountdownTimer() {
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(1), event -> {
@@ -228,6 +244,10 @@ public class DiveSimulator extends Application {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
     }
+
+    /**
+     * Begins a simulation of a dive.
+     */
 
     private void startDive() {
         movementStopped = false;
@@ -266,9 +286,17 @@ public class DiveSimulator extends Application {
         }).start();
     }
 
+    /**
+     * Stops the movement of the instructor and students.
+     */
+
     private void stopMovement() {
         movementStopped = true;
     }
+
+    /**
+     * Moves student markers across the screen.
+     */
 
     private void moveStudentsMarkers() {
         if (!movementStopped) {
@@ -286,6 +314,10 @@ public class DiveSimulator extends Application {
         }
     }
 
+    /**
+     * Moves the instructor's marker across the screen.
+     */
+
     private void moveInstructorMarker() {
         if (!movementStopped) {
             instructorMarkerX += 3;
@@ -293,6 +325,10 @@ public class DiveSimulator extends Application {
             instructorPath.add(new Point2D(instructorMarkerX, instructorY));
         }
     }
+
+    /**
+     * Updates diving depths for students.
+     */
 
     private void updateDepths() {
         for (Student student : selectedStudents) {
@@ -305,6 +341,10 @@ public class DiveSimulator extends Application {
 
         instructorMarkerX += 10;
     }
+
+    /**
+     * Draws the current state of the simulation on the screen.
+     */
 
     private void draw() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -335,11 +375,19 @@ public class DiveSimulator extends Application {
         drawLabels();
     }
 
+    /**
+     * Draws a surface line with a label.
+     */
+
     private void drawSurfaceLineWithLabel(double startX, double startY, double endX, double endY, String label, double labelX, double labelY) {
         gc.setStroke(Color.BLUE);
         gc.strokeLine(startX, startY, endX, endY);
         gc.fillText(label, labelX, labelY);
     }
+
+    /**
+     * Draws a horizontal line with the label.
+     */
 
     private void drawHorizontalLineWithLabel(double startX, double startY, double endX, double endY, String label, double labelX, double labelY) {
         gc.setStroke(Color.BLACK);
@@ -347,6 +395,10 @@ public class DiveSimulator extends Application {
         gc.strokeLine(startX, startY, endX, endY);
         gc.fillText(label, labelX, labelY);
     }
+
+    /**
+     * Draws the instructor's marker and his path.
+     */
 
     private void drawInstructor() {
         gc.setFill(Color.RED);
@@ -359,6 +411,11 @@ public class DiveSimulator extends Application {
             gc.strokeLine(prevPoint.getX(), prevPoint.getY(), currentPoint.getX(), currentPoint.getY());
         }
     }
+
+
+    /**
+     * Draws student markers and their paths.
+     */
 
     private void drawStudents() {
         Color[] colors = {Color.BLUE, Color.GREEN, Color.GOLD};
@@ -381,6 +438,10 @@ public class DiveSimulator extends Application {
         }
     }
 
+    /**
+     * Draws labels for the instructor and students.
+     */
+
     private void drawLabels() {
 
         gc.setFill(Color.RED);
@@ -396,6 +457,10 @@ public class DiveSimulator extends Application {
             labelOffset += 20;
         }
     }
+
+    /**
+     * Calculates depth correction depending on the diver's experience.
+     */
 
     private double getDepthAdjustment(String experience) {
         double adjustment = 0;
@@ -415,6 +480,10 @@ public class DiveSimulator extends Application {
         }
         return adjustment;
     }
+
+    /**
+     * Updates air levels for instructor and students.
+     */
 
     private void updateAirLevels() {
 
@@ -438,6 +507,10 @@ public class DiveSimulator extends Application {
         updateDepthInfo();
     }
 
+    /**
+     * Updates air level information for instructor and students.
+     */
+
     private void updateAirInfo() {
         StringBuilder airInfo = new StringBuilder();
         airInfo.append("Instructor: ").append(String.format("%.1f", instructorAirLevel)).append("L\n");
@@ -447,6 +520,10 @@ public class DiveSimulator extends Application {
         airInfoArea.setText(airInfo.toString());
     }
 
+    /**
+     * Updates depth information for instructor and students.
+     */
+
     private void updateDepthInfo() {
         StringBuilder depthInfo = new StringBuilder();
         depthInfo.append("Instructor depth: ").append(String.format("%.1f", instructorDepth)).append("m\n");
@@ -455,6 +532,10 @@ public class DiveSimulator extends Application {
         }
         depthInfoArea.setText(depthInfo.toString());
     }
+
+    /**
+     * Displays an alert message.
+     */
 
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

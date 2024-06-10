@@ -4,6 +4,10 @@ import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a student diver in the simulation.
+ */
+
 public class Student {
     private int id;
     private String name;

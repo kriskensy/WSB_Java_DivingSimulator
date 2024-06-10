@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * This class builds a connection to the database.
+ */
+
 public class DatabaseConnector {
 
     private static final String URL = "jdbc:mysql://localhost:3306/diving_simulator";
@@ -23,6 +27,10 @@ public class DatabaseConnector {
         }
         return connection;
     }
+
+    /**
+     * Main method for testing the database connection.
+     */
 
     public static void main(String[] args) {
 
